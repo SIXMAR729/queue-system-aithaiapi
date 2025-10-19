@@ -1,0 +1,145 @@
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 2rem;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ccc;
+}
+
+header h1 {
+    color: #343a40;
+}
+
+.reset-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #c82333;
+}
+
+.display-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-top: 5px solid;
+}
+
+.card h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.number-display {
+    margin-bottom: 1.5rem;
+}
+
+.number-display p {
+    margin: 0;
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.number-display h3 {
+    margin: 0;
+    font-size: 5rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #212529;
+}
+
+.queue-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #495057;
+    padding: 0 1rem;
+}
+
+.call-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: auto;
+}
+
+.call-btn:hover {
+    background-color: #0056b3;
+}
+
+.call-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Card border colors */
+.card.red { border-color: #E63946; }
+.card.pink { border-color: #f780b3; }
+.card.gray { border-color: #8D99AE; }
+.card.green { border-color: #2A9D8F; }
+.card.orange { border-color: #F4A261; }
+.card.blue { border-color: #0077b6; }
+
+header {
+    flex-wrap: wrap;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logout-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #5a6268;
+}
