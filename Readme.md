@@ -1,56 +1,56 @@
-Queue System Project Review
-This is a web-based queue management system with two main components:
+การตรวจสอบโปรเจกต์ระบบคิว (Queue System Project Review)
+นี่คือระบบจัดการคิวบนเว็บซึ่งมีส่วนประกอบหลัก 2 ส่วน:
 
-Public Kiosk (index.html, script.js, style.css): A simple interface for users to select a service category and get a ticket number.
+ตู้กดบัตรคิวสำหรับผู้ใช้ทั่วไป (index.html, script.js, style.css): หน้าจออย่างง่ายสำหรับให้ผู้ใช้เลือกประเภทบริการและรับหมายเลขบัตรคิว
 
-Staff Interface (display.php, display.js, display.css, login.html, login.js, login.css): A password-protected area for staff to view the queue, call the next ticket, and reset the queue.
+หน้าจอสำหรับเจ้าหน้าที่ (display.php, display.js, display.css, login.html, login.js, login.css): พื้นที่สำหรับเจ้าหน้าที่ที่ป้องกันด้วยรหัสผ่าน เพื่อใช้ดูคิว, เรียกคิวถัดไป, และรีเซ็ตคิว
 
-Core Functionality:
-Authentication: A login system (login.html, auth.php) for staff.
+ฟังก์ชันการทำงานหลัก:
+การยืนยันตัวตน (Authentication): ระบบล็อกอิน (login.html, auth.php) สำหรับเจ้าหน้าที่
 
-Queue Management:
+การจัดการคิว (Queue Management):
 
-get_ticket.php: Generates a new ticket number for a selected category.
+get_ticket.php: สร้างหมายเลขบัตรคิวใหม่สำหรับประเภทบริการที่เลือก
 
-display_data.php: Provides real-time queue data to the staff display.
+display_data.php: ส่งข้อมูลคิวแบบเรียลไทม์ไปยังหน้าจอของเจ้าหน้าที่
 
-call_next.php: Marks the next ticket as "called".
+call_next.php: ทำเครื่องหมายบัตรคิวถัดไปว่าเป็น "ถูกเรียกแล้ว" (called)
 
-reset_queue.php: Clears the entire queue.
+reset_queue.php: ล้างข้อมูลคิวทั้งหมด
 
-Database: A MySQL database (queue_db) with a tickets table to store queue information and a staff table for user authentication.
+ฐานข้อมูล (Database): ฐานข้อมูล MySQL (queue_db) ที่มีตาราง tickets สำหรับเก็บข้อมูลคิว และตาราง staff สำหรับการยืนยันตัวตนผู้ใช้
 
-Text-to-Speech Feature 🗣️
-Voice Announcements: The system integrates a Text-to-Speech (TTS) feature to audibly announce the called ticket number for enhanced accessibility.
+ฟีเจอร์แปลงข้อความเป็นเสียงพูด 🗣️
+การประกาศเรียกคิวด้วยเสียง: ระบบได้รวมฟีเจอร์แปลงข้อความเป็นเสียง (Text-to-Speech หรือ TTS) เพื่อประกาศเรียกหมายเลขคิวด้วยเสียง ช่วยให้เข้าถึงได้ง่ายขึ้น
 
-API Integration: It utilizes the external AI for Thai (VAJA) API for high-quality, natural-sounding Thai voice synthesis.
+การเชื่อมต่อ API: ใช้ API ภายนอกของ AI for Thai (VAJA) เพื่อสังเคราะห์เสียงภาษาไทยคุณภาพสูงและมีความเป็นธรรมชาติ
 
-Backend Handler (generate_speech.php): A dedicated PHP script handles the TTS workflow:
+ตัวจัดการฝั่ง Backend (generate_speech.php): มีสคริปต์ PHP ที่จัดการกระบวนการของ TTS โดยเฉพาะ:
 
-Receives text from the staff interface (display.js).
+รับข้อความจากหน้าจอของเจ้าหน้าที่ (display.js)
 
-Calls the VAJA API to generate an audio file from the text.
+เรียก VAJA API เพื่อสร้างไฟล์เสียงจากข้อความ
 
-Downloads the generated audio file (.wav) to the local server.
+ดาวน์โหลดไฟล์เสียง (.wav) ที่สร้างเสร็จแล้วมาเก็บไว้ที่เซิร์ฟเวอร์
 
-Returns the local URL of the audio file to the frontend.
+ส่ง URL ของไฟล์เสียงที่อยู่บนเซิร์ฟเวอร์กลับไปให้ฝั่ง Frontend
 
-Frontend Player (display.js): The staff interface dynamically creates and plays the audio file upon successfully calling a ticket.
+ตัวเล่นฝั่ง Frontend (display.js): หน้าจอของเจ้าหน้าที่จะสร้างและเล่นไฟล์เสียงโดยอัตโนมัติเมื่อเรียกคิวสำเร็จ
 
-Security:
-A security review was performed and the following fixes were implemented:
+ความปลอดภัย:
+ได้มีการตรวจสอบความปลอดภัยและมีการแก้ไขดังต่อไปนี้:
 
-Password Hashing: A script (hash_passwords.php) was added to hash the passwords in the staff table.
+การเข้ารหัสรหัสผ่าน (Password Hashing): เพิ่มสคริปต์ (hash_passwords.php) เพื่อเข้ารหัสรหัสผ่านในตาราง staff
 
-Authentication: Authentication checks were added to the call_next.php and reset_queue.php scripts.
+การยืนยันตัวตน (Authentication): เพิ่มการตรวจสอบการยืนยันตัวตนในสคริปต์ call_next.php และ reset_queue.php
 
-Session Management: A session fixation vulnerability was fixed in auth.php.
+การจัดการเซสชัน (Session Management): แก้ไขช่องโหว่ session fixation ในไฟล์ auth.php
 
-Recommendations:
-Database Credentials: The db_connect.php file is using default "root" credentials, which is a major security risk. You should create a dedicated database user with limited permissions and use those credentials instead.
+ข้อเสนอแนะ:
+ข้อมูลการเข้าถึงฐานข้อมูล (Database Credentials): ไฟล์ db_connect.php ยังคงใช้ข้อมูลการเข้าถึงเริ่มต้นคือ "root" ซึ่งเป็นความเสี่ยงด้านความปลอดภัยที่สำคัญอย่างยิ่ง คุณควรสร้างผู้ใช้ฐานข้อมูลเฉพาะที่มีสิทธิ์จำกัดและใช้ข้อมูลนั้นแทน
 
-User Management: The system is lacking a user registration or password management feature. You should consider adding a way for administrators to manage staff accounts.
+การจัดการผู้ใช้ (User Management): ระบบยังขาดฟีเจอร์การลงทะเบียนผู้ใช้หรือการจัดการรหัสผ่าน คุณควรพิจารณาเพิ่มช่องทางสำหรับผู้ดูแลระบบ (administrator) ในการจัดการบัญชีของเจ้าหน้าที่
 
-Error Handling: The error messages are in Thai, which is good for the users, but for development and debugging, it would be better to have more detailed error logging on the server side.
+การจัดการข้อผิดพลาด (Error Handling): ข้อความแสดงข้อผิดพลาดเป็นภาษาไทยซึ่งดีต่อผู้ใช้งาน แต่สำหรับการพัฒนาและแก้ไขบั๊ก (debug) ควรมีการบันทึกข้อผิดพลาด (error logging) ที่ละเอียดมากขึ้นฝั่งเซิร์ฟเวอร์
 
-This project is a good example of a simple, functional web application. The code is well-structured and easy to understand. By addressing the remaining security recommendations, you can make it a robust and secure system.
+โปรเจกต์นี้เป็นตัวอย่างที่ดีของเว็บแอปพลิเคชันที่เรียบง่ายและใช้งานได้จริง โค้ดมีโครงสร้างที่ดีและเข้าใจง่าย หากแก้ไขตามข้อเสนอแนะด้านความปลอดภัยที่เหลืออยู่ ก็จะทำให้ระบบนี้มีความเสถียรและปลอดภัยมากยิ่งขึ้น
