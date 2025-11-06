@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php'; // เรียกใช้ไฟล์เชื่อมต่อฐานข้อมูล
+require_once __DIR__ . '/db_connect.php'; // เรียกใช้ไฟล์เชื่อมต่อฐานข้อมูล
 
 session_start(); 
 

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(loginForm);
         
         try {
-            const response = await fetch('auth.php', {
+            const response = await fetch('api/auth.php', {
                 method: 'POST',
                 body: formData
             });

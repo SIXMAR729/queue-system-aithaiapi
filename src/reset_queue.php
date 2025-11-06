@@ -1,12 +1,22 @@
 <?php
+
 session_start();
+
+header('Content-Type: application/json');
+
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Authentication required.']);
-    exit;
+    
+    http_response_code(401); // 401 means "Unauthorized"
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Authentication required. You must be logged in to do this.'
+    ]);
+    exit; 
 }
 
-require 'db_connect.php';
+
+require_once __DIR__ . '/db_connect.php';
 
 header('Content-Type: application/json');
 

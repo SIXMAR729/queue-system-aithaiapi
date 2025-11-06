@@ -1,14 +1,17 @@
 <?php
+
 session_start();
+
+header('Content-Type: application/json');
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'message' => 'Authentication required.']);
     exit;
 }
 
-require 'db_connect.php';
+require_once __DIR__ . '/db_connect.php';
 
-header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => 'Invalid request'];
 
@@ -27,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category'])) {
         $ticket_id = $ticket_to_call['id'];
         $ticket_number = $ticket_to_call['ticket_number'];
 
-        // อัปเดตสถานะเป็น 'called'
         $sql_update = "UPDATE tickets SET status = 'called' WHERE id = ?";
         $stmt_update = $conn->prepare($sql_update);
         $stmt_update->bind_param("i", $ticket_id);

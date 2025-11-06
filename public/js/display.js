@@ -5,26 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✨ **1. ฟังก์ชันใหม่สำหรับเรียก API และเล่นเสียง**
     async function playAudioFromApi(text) {
         try {
+
+            const formData = new URLSearchParams();
+            formData.append('text', text);
             // ส่งข้อความไปให้ generate_speech.php
-            const response = await fetch('generate_speech.php', {
+
+            const response = await fetch('api/generate_speech.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: text })
-            });
+                body:  formData
+             });
 
             const result = await response.json();
 
-            if (result.success && result.audioUrl) {
+            if (result.success && result.file) {
                 // ถ้าสำเร็จ สร้าง element เสียงแล้วสั่งเล่น
-                const audio = new Audio(result.audioUrl);
+                const audio = new Audio(result.file);
                 audio.play();
 
                 // (ตัวเลือกเสริม) ลบไฟล์เสียงหลังจากเล่นเสร็จเพื่อไม่ให้รกเซิร์ฟเวอร์
                 audio.onended = () => {
                     // เราจะสร้างฟังก์ชันลบไฟล์ในภายหลังถ้าต้องการ
-                    console.log('Finished playing:', result.audioUrl);
+                    console.log('Finished playing:', result.file);
                 };
 
             } else {
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('category', category);
 
         try {
-            const response = await fetch('call_next.php', {
+            const response = await fetch('api/call_next.php', {
                 method: 'POST',
                 body: formData
             });
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function updateDisplay() {
         try {
-            const response = await fetch('display_data.php');
+            const response = await fetch('api/display_data.php');
             const data = await response.json();
             for (const category in data) {
                 const info = data[category];
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isConfirmed = confirm('คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตคิวทั้งหมด? การกระทำนี้ไม่สามารถย้อนกลับได้');
         if (isConfirmed) {
             try {
-                const response = await fetch('reset_queue.php', { method: 'POST' });
+                const response = await fetch('api/reset_queue.php', { method: 'POST' });
                 const result = await response.json();
                 if (result.success) {
                     alert('รีเซ็ตคิวทั้งหมดเรียบร้อยแล้ว');

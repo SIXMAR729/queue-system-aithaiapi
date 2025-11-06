@@ -1,0 +1,9 @@
+#Audio files
+*.wav
+*.mp3
+#Database connection files
+db_connect.php
+#System files
+.DS_Store
+thumbs.db
+.htaccess

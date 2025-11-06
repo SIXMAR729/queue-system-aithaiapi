@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // ส่ง request ไปยัง get_ticket.php
-                const response = await fetch('get_ticket.php', {
+                const response = await fetch('api/get_ticket.php', {
                     method: 'POST',
                     body: formData
                 });
