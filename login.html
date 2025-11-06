@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ล็อกอินสำหรับเจ้าหน้าที่</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <form id="login-form">
+            <h2>เข้าสู่ระบบเจ้าหน้าที่</h2>
+            <div id="error-message" class="error-message"></div>
+            <div class="input-group">
+                <label for="username">ชื่อผู้ใช้</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">รหัสผ่าน</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">ล็อกอิน</button>
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
