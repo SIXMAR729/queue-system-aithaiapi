@@ -111,6 +111,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const logoutButton = document.getElementById('logout-staff');
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            const isConfirmed = confirm('คุณต้องการออกจากระบบหรือไม่?');
+            
+            if (isConfirmed) {
+                try {
+                    // Call the logout API
+                    const response = await fetch('api/logout.php', { method: 'POST' });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        
+                        alert('ออกจากระบบสำเร็จ');
+                        window.location.href = 'login.html'; // Redirect
+                    } else {
+                        alert('เกิดข้อผิดพลาดในการออกจากระบบ');
+                    }
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+        });
+    }
+
     updateDisplay();
     setInterval(updateDisplay, 5000);
 });

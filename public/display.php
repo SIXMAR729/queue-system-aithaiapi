@@ -23,6 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <header>
             <h1>หน้าจอเรียกคิวสำหรับเจ้าหน้าที่</h1>
             <button id="reset-btn" class="reset-button">รีเซ็ตคิวทั้งหมด (เริ่มวันใหม่)</button>
+            <button id="logout-staff" class="reset-button">ล๊อคเอ้าท์</button>
         </header>
 
         <div class="display-grid">

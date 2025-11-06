@@ -1,7 +1,11 @@
 <?php
 session_start();
-$_SESSION = array();
+
+$_SESSION = [];
+
+session_unset();
 session_destroy();
-header('Location: login.html');
-exit;
+
+header('Content-Type: application/json');
+echo json_encode(['success' => true]);
 ?>
