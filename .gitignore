@@ -7,3 +7,5 @@ db_connect.php
 .DS_Store
 thumbs.db
 .htaccess
+db_connect.php
+src/config.php

@@ -20,8 +20,10 @@ if (!isset($_POST['text']) || empty($_POST['text'])) {
 $text_to_speak = $_POST['text'];
 
 // --- ส่วนที่ 1: เรียก API เพื่อสังเคราะห์เสียง ---
+require_once __DIR__ . '/config.php';
+
 // 3. [FIXED] ใช้ API Key จากไฟล์ config ที่ปลอดภัย
-$apiKey = 'Your-API-From-TH-AI';
+$apiKey = API_KEY;
 
 if (empty($apiKey)) {
     echo json_encode(['success' => false, 'message' => 'API key is not configured on the server.']);
